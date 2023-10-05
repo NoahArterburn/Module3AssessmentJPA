@@ -4,11 +4,10 @@ import java.util.Scanner;
 import controller.CMAMhelper;
 import model.CMAM;
 
-
 public class StartProgram {
 	static Scanner in = new Scanner(System.in);
 	static CMAMhelper lih = new CMAMhelper();
-	
+
 	private static void addAnItem() {
 		System.out.print("Enter a make: ");
 		String make = in.nextLine();
@@ -16,10 +15,10 @@ public class StartProgram {
 		String model = in.nextLine();
 		System.out.print("Enter an year: ");
 		String year = in.nextLine();
-		CMAM toAdd = new CMAM(make, model, year );
+		CMAM toAdd = new CMAM(make, model, year);
 		lih.insertItem(toAdd);
 	}
-	
+
 	private static void deleteAnItem() {
 		System.out.print("Enter the make to delete: ");
 		String make = in.nextLine();
@@ -28,7 +27,7 @@ public class StartProgram {
 		System.out.print("Enter the year to delete: ");
 		String year = in.nextLine();
 	}
-	
+
 	private static void editAnItem() {
 		System.out.println("How would you like to search? ");
 		System.out.println("1 : Search by Make");
@@ -40,14 +39,15 @@ public class StartProgram {
 		if (searchBy == 1) {
 			System.out.print("Enter the Make name: ");
 			String makeName = in.nextLine();
-		} 
-		else if(searchBy == 2) {
+			foundItems = lih.searchForItemByMake(makeName);
+		} else if (searchBy == 2) {
 			System.out.print("Enter the model: ");
 			String modelName = in.nextLine();
-			}
-		else {
+			foundItems = lih.searchForItemByMake(modelName);
+		} else {
 			System.out.print("Enter the Year: ");
 			String yearName = in.nextLine();
+			foundItems = lih.searchForItemByMake(yearName);
 		}
 		if (!foundItems.isEmpty()) {
 			System.out.println("Found Results.");
@@ -57,7 +57,8 @@ public class StartProgram {
 			System.out.print("Which ID to edit: ");
 			int idToEdit = in.nextInt();
 			CMAM toEdit = lih.searchForItemById(idToEdit);
-			System.out.println("Changed " + toEdit.getYear() + ". Changed " + toEdit.getModel() + ". Changed " + toEdit.getMake());
+			System.out.println(
+					"Changed " + toEdit.getYear() + ". Changed " + toEdit.getModel() + ". Changed " + toEdit.getMake());
 			System.out.println("1 : Update Make");
 			System.out.println("2 : Update Model");
 			System.out.println("3 : Update Year");
@@ -81,41 +82,40 @@ public class StartProgram {
 			System.out.println("---- No results found");
 		}
 	}
-		public static void main(String[] args) {
-			// TODO Auto-generated method stub
-			runMenu();
-		}
 
-		public static void runMenu() {
-			boolean goAgain = true;
-			System.out.println("--- Welcome to our car list!---");
-			while (goAgain) {
-				System.out.println("* Select an item:");
-				System.out.println("* 1 -- Add an item");
-				System.out.println("* 2 -- Edit an item");
-				System.out.println("* 3 -- Delete an item");
-				System.out.println("* 4 -- View the list");
-				System.out.println("* 5 -- Exit the program");
-				System.out.print("* Your selection: ");
-				int selection = in.nextInt();
-				in.nextLine();
-				if (selection == 1) {
-					addAnItem();
-				} else if (selection == 2) {
-					editAnItem();
-				} else if (selection == 3) {
-					deleteAnItem();
-				} else if (selection == 4) {
-					viewTheList();
-				} else {
-					// lih.cleanUp();
-					System.out.println(" Goodbye! ");
-					goAgain = false;
-				}
+	public static void main(String[] args) {
+		runMenu();
+	}
+
+	public static void runMenu() {
+		boolean goAgain = true;
+		System.out.println("--- Welcome to our car list!---");
+		while (goAgain) {
+			System.out.println("* Select an item:");
+			System.out.println("* 1 -- Add an item");
+			System.out.println("* 2 -- Edit an item");
+			System.out.println("* 3 -- Delete an item");
+			System.out.println("* 4 -- View the list");
+			System.out.println("* 5 -- Exit the program");
+			System.out.print("* Your selection: ");
+			int selection = in.nextInt();
+			in.nextLine();
+			if (selection == 1) {
+				addAnItem();
+			} else if (selection == 2) {
+				editAnItem();
+			} else if (selection == 3) {
+				deleteAnItem();
+			} else if (selection == 4) {
+				viewTheList();
+			} else {
+				// lih.cleanUp();
+				System.out.println(" Goodbye! ");
+				goAgain = false;
 			}
 		}
+	}
 
-		private static void viewTheList() {
-			// TODO Auto-generated method stub
-		}
+	private static void viewTheList() {
+	}
 }

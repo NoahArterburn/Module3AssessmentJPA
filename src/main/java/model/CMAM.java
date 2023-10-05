@@ -62,4 +62,9 @@ public class CMAM {
 	public void setYear(String year) {
 		this.year = year;
 	}
+	@Override
+	public String toString() {
+		return "CMAM [id=" + id + ", make=" + make + ", model=" + model + ", year=" + year + "]";
+	}
+	
 }
